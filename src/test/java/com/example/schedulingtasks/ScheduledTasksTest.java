@@ -34,7 +34,13 @@ public class ScheduledTasksTest {
 
 	@Test
 	public void reportCurrentTime() {
+		// Utiliza Awaitility para esperar un máximo de 10 segundos hasta que se cumpla la condición especificada
+		// en el bloque untilAsserted. Esto es útil en escenarios asíncronos donde no se puede predecir el
+		// momento exacto en el que ocurrirá la acción.
 		await().atMost(Durations.TEN_SECONDS).untilAsserted(() -> {
+			// Verifica que el método reportCurrentTime() de la clase ScheduledTasks haya sido llamado
+			//  al menos dos veces en los 10 segundos establecidos.
+			//  Esto es típico para probar que una tarea programada se ejecuta con la frecuencia esperada.
 			verify(tasks, atLeast(2)).reportCurrentTime();
 		});
 	}
